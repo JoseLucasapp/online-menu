@@ -1,0 +1,28 @@
+.product-main{
+    width: 10vw;
+    max-width: 15vw;
+    height: 20vh;
+    max-height: 25vh;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--baseColor);
+    margin-top: 2vh;
+    margin: 1vh;
+    border-radius: 1vh;
+    align-items: center;
+    justify-content: space-evenly;
+    cursor: pointer;
+    transform: scale(0.9);
+}
+
+.product-main:hover{
+    transform: scale(1);
+}
+
+.text{
+    display: flex;
+    flex-direction: column;
+    color: var(--secondColor);
+    font-size: 3vh;
+    font-weight: 500;
+}
