@@ -4,6 +4,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--secondColor);
 }
 
 code {
@@ -22,6 +23,6 @@ button{
 }
 
 :root{
-  --green:#01A368 ;
-  --orange: #FF7538 ;
+  --baseColor: rgb(55, 38, 121, 100%);
+  --secondColor: gainsboro;
 }
