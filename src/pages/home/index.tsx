@@ -60,6 +60,7 @@ export default function Home(){
     const categories = ['Drinks', 'Seafood', 'Vegan']
 
     const leftMenu = document.getElementById('left-menu')
+    const rightMenu = document.getElementById('right-menu')
     const coverPage = document.getElementById('cover-page')
 
     const handleActivateLeftMenu = ()=>{
@@ -76,6 +77,24 @@ export default function Home(){
         }
     }
 
+    const handleSelectCategory = (category: string)=>{
+        handleDeactivateLeftMenu()
+    }
+
+    const handleDeactivateRightMenu = ()=>{
+        if(rightMenu && coverPage){
+            rightMenu.style.display = 'none'
+            coverPage.style.display = 'none'
+        }
+    }
+
+    const handleActivateRightMenu = ()=>{
+        if(rightMenu && coverPage){
+            rightMenu.style.display = 'flex'
+            coverPage.style.display = 'flex'
+        }
+    }
+
     return(
         <div className="main-home">
             <div className="top-bar">
@@ -84,7 +103,7 @@ export default function Home(){
                     <p>Restaurant Name</p>
                 </div>
                 
-                <img src={process.env.PUBLIC_URL + 'images/shopping-cart64.png'} alt="" />
+                <img src={process.env.PUBLIC_URL + 'images/shopping-cart64.png'} alt="" onClick={()=>handleActivateRightMenu()} />
             </div>
             <div className="body-home">
                 <div className="selected-category">
@@ -105,12 +124,21 @@ export default function Home(){
                 <div className="menu-category-options">
                     {
                         categories.map((e)=>(
-                            <p>{e}</p>
+                            <p onClick={()=> handleSelectCategory(e)}>{e}</p>
                         ))
                     }
                 </div>
             </div>
             <div className="cover-page" id="cover-page" onClick={()=>handleDeactivateLeftMenu()}></div>
+
+            <div className="right-menu" id="right-menu" onClick={()=>handleDeactivateRightMenu()}>
+                <img src={process.env.PUBLIC_URL + 'images/close.png'} alt="" onClick={()=> handleDeactivateRightMenu()}/>
+                <div className="billet"></div>
+                <div className="cart-buttons">
+                    <button>Confirmar</button>
+                    <img src={process.env.PUBLIC_URL + 'images/delete.png'} alt="" />
+                </div>
+            </div>
         </div>
     )
 }
