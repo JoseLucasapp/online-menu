@@ -95,6 +95,16 @@ export default function Home(){
         }
     }
 
+    const handleDeactivateAllMenu = ()=>{
+        if(rightMenu && coverPage ){
+            handleDeactivateRightMenu()
+        }
+
+        if(leftMenu && coverPage){
+            handleDeactivateLeftMenu()
+        }
+    }
+
     return(
         <div className="main-home">
             <div className="top-bar">
@@ -129,7 +139,7 @@ export default function Home(){
                     }
                 </div>
             </div>
-            <div className="cover-page" id="cover-page" onClick={()=>handleDeactivateLeftMenu()}></div>
+            <div className="cover-page" id="cover-page" onClick={()=>handleDeactivateAllMenu()}></div>
 
             <div className="right-menu" id="right-menu" onClick={()=>handleDeactivateRightMenu()}>
                 <img src={process.env.PUBLIC_URL + 'images/close.png'} alt="" onClick={()=> handleDeactivateRightMenu()}/>
