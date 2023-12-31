@@ -25,4 +25,5 @@ button{
 :root{
   --baseColor: rgb(55, 38, 121, 100%);
   --secondColor: gainsboro;
+  --green: #608C4B;
 }
