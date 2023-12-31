@@ -159,6 +159,7 @@
     height: 80vh;
     background-color: var(--secondColor);
     margin-top: 10vh;
+    overflow: scroll;
 }
 
 .right-menu .cart-buttons{
@@ -177,6 +178,9 @@
     font-weight: 500;
     transform: scale(0.9);
     border-radius: 5px;
+    background-color: var(--green);
+    color: var(--secondColor);
+    align-items: center;
 }
 .right-menu .cart-buttons button:hover{
     transform: scale(1);
@@ -191,4 +195,12 @@
 
 .right-menu .cart-buttons img:hover{
     transform: scale(1);
+}
+
+.right-menu .total-value{
+    position: absolute;
+    margin: 10px;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--secondColor);
 }

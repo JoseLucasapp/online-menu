@@ -1,6 +1,7 @@
 import React from "react";
 import './index.css'
 import ProductComponent from "../../components/product";
+import ProductChart from "../../components/product-chart";
 
 export default function Home(){
     const products = [
@@ -58,6 +59,11 @@ export default function Home(){
     ]
 
     const categories = ['Drinks', 'Seafood', 'Vegan']
+    const chart = [{name: 'Cocktail', price: 20.00, amount: 1}, {name: 'Cocktail', price: 20.00, amount: 1},{name: 'Cocktail', price: 20.00, amount: 1}]
+
+    let total = chart.reduce((accumulator, object) => {
+        return accumulator + object.price;
+      }, 0);
 
     const leftMenu = document.getElementById('left-menu')
     const rightMenu = document.getElementById('right-menu')
@@ -143,7 +149,14 @@ export default function Home(){
 
             <div className="right-menu" id="right-menu" onClick={()=>handleDeactivateRightMenu()}>
                 <img src={process.env.PUBLIC_URL + 'images/close.png'} alt="" onClick={()=> handleDeactivateRightMenu()}/>
-                <div className="billet"></div>
+                <p className="total-value">Total: R$ {(total).toFixed(2)}</p>
+                <div className="billet">
+                    {
+                        chart.map((e)=>(
+                            <ProductChart name={e.name} price={e.price} amount={e.amount} />
+                        ))
+                    }
+                </div>
                 <div className="cart-buttons">
                     <button>Confirmar</button>
                     <img src={process.env.PUBLIC_URL + 'images/delete.png'} alt="" />
