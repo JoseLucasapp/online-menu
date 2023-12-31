@@ -1,8 +1,8 @@
 .product-main{
-    width: 10vw;
+    width: 15vw;
     max-width: 15vw;
-    height: 20vh;
-    max-height: 25vh;
+    height: 35vh;
+    max-height: 35vh;
     display: flex;
     flex-direction: column;
     background-color: var(--baseColor);
@@ -25,4 +25,5 @@
     color: var(--secondColor);
     font-size: 3vh;
     font-weight: 500;
+    align-items: center;
 }
