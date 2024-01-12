@@ -1,65 +1,37 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import './index.css'
 import ProductComponent from "../../components/product";
 import ProductChart from "../../components/product-chart";
 import ProductById from "../../components/product-by-id";
+import { API_DATA } from "../../api";
 
-export default function Home(){
-    const products = [
+export interface ProductInterface{
+    name: string;
+    price: number;
+    img: string;
+}
 
-        {
-            name: 'Café',
-            price: 20.00,
-            img: 'soft-drink.png'
-        },
-        {
-            name: 'Café',
-            price: 20.00,
-            img: 'soft-drink.png'
-        },
-        {
-            name: 'Café',
-            price: 20.00,
-            img: 'soft-drink.png'
-        },
-        {
-            name: 'Café',
-            price: 20.00,
-            img: 'soft-drink.png'
-        },
-        {
-            name: 'Café',
-            price: 20.00,
-            img: 'soft-drink.png'
-        },
-        {
-            name: 'Café',
-            price: 20.00,
-            img: 'soft-drink.png'
-        },
-        {
-            name: 'Café',
-            price: 20.00,
-            img: 'soft-drink.png'
-        },
-        {
-            name: 'Café',
-            price: 20.00,
-            img: 'soft-drink.png'
-        },
-        {
-            name: 'Café',
-            price: 20.00,
-            img: 'soft-drink.png'
-        },
-        {
-            name: 'Café',
-            price: 20.00,
-            img: 'soft-drink.png'
-        },
-    ]
+export default function Home(){ 
 
-    const categories = ['Drinks', 'Seafood', 'Vegan']
+    const data = API_DATA
+
+    const [products, setProducts] = useState(Array<ProductInterface>)
+    const [selectedCategory, setSelectedCategory] = useState(data[0].category)
+
+    const handleSelectedCategory = ()=>{
+        // eslint-disable-next-line array-callback-return
+        data.find(e => {
+            if(e.category === selectedCategory){
+                setProducts(e.products)
+            }
+        })
+
+    }
+    
+ useEffect(()=>{
+        handleSelectedCategory()
+    },[handleSelectedCategory])
+    
     const chart = [{name: 'Cocktail', price: 20.00, amount: 1}, {name: 'Cocktail', price: 20.00, amount: 1},{name: 'Cocktail', price: 20.00, amount: 1}]
 
     let total = chart.reduce((accumulator, object) => {
@@ -88,6 +60,8 @@ export default function Home(){
     }
 
     const handleSelectCategory = (category: string)=>{
+        setSelectedCategory(category)
+        handleSelectedCategory()
         handleDeactivateLeftMenu()
     }
 
@@ -151,9 +125,9 @@ export default function Home(){
                 </div>
                 <div className="items">
                     {
-                        products.map((e)=>(
-                            <ProductComponent name={e.name} price={e.price} img={e.img} handleActivateCenterMenu={handleActivateCenterMenu}/>
-                        ))
+                            products.map((i)=>(
+                                <ProductComponent name={i.name} price={i.price} img={i.img} handleActivateCenterMenu={handleActivateCenterMenu}/>
+                            ))
                     }
                 </div>
             </div>
@@ -163,8 +137,8 @@ export default function Home(){
                 <img src={process.env.PUBLIC_URL + 'images/logo.webp'} alt="" className="logo" />
                 <div className="menu-category-options">
                     {
-                        categories.map((e)=>(
-                            <p onClick={()=> handleSelectCategory(e)}>{e}</p>
+                        data.map((e)=>(
+                            <p onClick={()=> handleSelectCategory(e.category)}>{e.category}</p>
                         ))
                     }
                 </div>
