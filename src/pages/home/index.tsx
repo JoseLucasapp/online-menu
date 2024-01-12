@@ -2,6 +2,7 @@ import React from "react";
 import './index.css'
 import ProductComponent from "../../components/product";
 import ProductChart from "../../components/product-chart";
+import ProductById from "../../components/product-by-id";
 
 export default function Home(){
     const products = [
@@ -65,11 +66,14 @@ export default function Home(){
         return accumulator + object.price;
       }, 0);
 
-    const leftMenu = document.getElementById('left-menu')
-    const rightMenu = document.getElementById('right-menu')
-    const coverPage = document.getElementById('cover-page')
+    let leftMenu = document.getElementById('left-menu')
+    let rightMenu = document.getElementById('right-menu')
+    let centerMenu = document.getElementById('center-menu')
+    let coverPage = document.getElementById('cover-page')
 
     const handleActivateLeftMenu = ()=>{
+        leftMenu = document.getElementById('left-menu')
+        coverPage = document.getElementById('cover-page')
         if(leftMenu && coverPage){
             leftMenu.style.display = 'flex'
             coverPage.style.display = 'flex'
@@ -95,6 +99,8 @@ export default function Home(){
     }
 
     const handleActivateRightMenu = ()=>{
+        rightMenu = document.getElementById('right-menu')
+        coverPage = document.getElementById('cover-page')
         if(rightMenu && coverPage){
             rightMenu.style.display = 'flex'
             coverPage.style.display = 'flex'
@@ -111,8 +117,26 @@ export default function Home(){
         }
     }
 
+    const handleActivateCenterMenu = ()=>{
+        console.log('dd')
+        centerMenu = document.getElementById('center-menu')
+        coverPage = document.getElementById('cover-page')
+        if(centerMenu && coverPage){
+            centerMenu.style.display = 'flex'
+            coverPage.style.display = 'flex'
+        }
+
+    }
+
+    const handleDeactivateCenterMenu = ()=>{
+        if(centerMenu && coverPage){
+            centerMenu.style.display = 'none'
+            coverPage.style.display = 'none'
+        }
+    }
+
     return(
-        <div className="main-home">
+        <div className="main-home" id="main-home">
             <div className="top-bar">
                 <div className="menu-name">
                     <img src={process.env.PUBLIC_URL + 'images/menu64.png'} alt="" onClick={()=>handleActivateLeftMenu()} />
@@ -128,7 +152,7 @@ export default function Home(){
                 <div className="items">
                     {
                         products.map((e)=>(
-                            <ProductComponent name={e.name} price={e.price} img={e.img} />
+                            <ProductComponent name={e.name} price={e.price} img={e.img} handleActivateCenterMenu={handleActivateCenterMenu}/>
                         ))
                     }
                 </div>
@@ -161,6 +185,10 @@ export default function Home(){
                     <button>Confirmar</button>
                     <img src={process.env.PUBLIC_URL + 'images/delete.png'} alt="" />
                 </div>
+            </div>
+
+            <div className="center-menu" id="center-menu">
+                <ProductById handleDeactivateCenterMenu={handleDeactivateCenterMenu}/>
             </div>
         </div>
     )
